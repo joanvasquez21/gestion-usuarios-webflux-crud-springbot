@@ -1,0 +1,40 @@
+<!DOCTYPE>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title th:title="${titulo}"></title>
+</head>
+<body>
+
+<div th:if="${param.error != null}" th:text="${param.error}"></div>
+<div th:if="${param.success != null}" th:text="${param.success}"></div>
+
+	<h1 th:text="${titulo}"></h1>
+	<a th:href="@{/form}">crear</a>
+
+
+	<!--  -->
+	<table th:action="@{/form}" method="post" th:object="${producto}">
+		<thead>
+			<tr>
+				<th>nombre</th>
+				<th>precio</th>
+				<th>fecha</th>
+				<th>editar</th>
+				<th>categoria</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="producto: ${productos}">
+				<td th:text="${producto.id}"></td>
+				<td th:text="${producto.nombre}"></td>
+				<td th:text="${producto.precio}"></td>
+				<td th:text="${producto.createAt}"></td>
+				<td th:text="${producto.categoria.nombre}"></td>				
+				<td><a th:href="@{/form/} + ${producto.id}">editar</a></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
